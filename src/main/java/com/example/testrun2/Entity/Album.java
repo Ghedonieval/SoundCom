@@ -25,5 +25,10 @@ public class Album {
 
     private long soldCopies;
 
-//    private List<Song> songs;
+    @ManyToOne
+    @JoinColumn(name = "artist_id")
+    private Artist artist;
+
+    @OneToMany(mappedBy = "album" , cascade = CascadeType.ALL)
+    private List<Song> songs;
 }

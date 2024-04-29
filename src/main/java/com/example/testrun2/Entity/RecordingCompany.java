@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "recording company")
+@Table(name = "recordingCompany")
 public class RecordingCompany {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,5 +23,6 @@ public class RecordingCompany {
 
     private String owner;
 
-    //    private List<Artist> artist;
+    @OneToMany(mappedBy = "recordingCompany" , cascade = CascadeType.ALL)
+    private List<Artist> artist;
 }

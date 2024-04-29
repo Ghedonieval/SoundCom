@@ -18,4 +18,8 @@ public class Song {
     private String name;
 
     private long duration;
+
+    @ManyToOne
+    @JoinColumn(name = "album_id")
+    private Album album;
 }

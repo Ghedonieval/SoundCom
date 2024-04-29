@@ -21,5 +21,10 @@ public class Artist {
 
     private String stageName;
 
-//    private List<Album> albums;
+    @ManyToOne
+    @JoinColumn(name = "recordingCompany_id")
+    private RecordingCompany recordingCompany;
+
+    @OneToMany(mappedBy = "artist" , cascade = CascadeType.ALL)
+    private List<Album> albums;
 }
