@@ -28,7 +28,12 @@ public class SongController {
     }
 
     @DeleteMapping
-    public ResponseEntity<String> deleteSong(@RequestParam String name){
+    public ResponseEntity<String> deleteAllSongs(){
+        return new ResponseEntity<>(service.deleteAllSongs() , HttpStatus.OK);
+    }
+
+    @DeleteMapping("/name")
+    public ResponseEntity<String> deleteSong(@RequestParam("name") String name){
         return ResponseEntity.ok(service.deleteSong(name));
     }
 }

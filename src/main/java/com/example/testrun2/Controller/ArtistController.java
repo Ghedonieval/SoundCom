@@ -36,6 +36,11 @@ public class ArtistController {
         return new ResponseEntity<>(service.deleteByStagename(stagename), HttpStatus.OK);
     }
 
+    @PutMapping("/name")
+    public ResponseEntity<String> updateByName(@RequestParam("name") String name , @RequestBody Artist request){
+        return new ResponseEntity<>(service.updateByName(name , request) , HttpStatus.OK);
+    }
+
     @PutMapping("/stageName")
     public ResponseEntity<String> updateStageName(@RequestParam("stageName") String stagename , @RequestBody Artist request){
         return new ResponseEntity<>(service.updateStagename(stagename, request) , HttpStatus.OK);

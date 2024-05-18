@@ -14,9 +14,7 @@ public class artistService {
     private final artistRepo artistRepo;
 
     public List<Artist> getAllArtist(){
-
         return artistRepo.findAll();
-
     }
 
     public String addArtist(Artist request){
@@ -25,15 +23,15 @@ public class artistService {
 
         if (exist == null) {
 
-            Artist artist = new Artist();
-            artist.setName(request.getName());
-            artist.setStageName(request.getStageName());
+            var artist = Artist.builder()
+                    .name(request.getName())
+                    .stageName(request.getStageName())
+                    .build();
 
             artistRepo.save(artist);
 
             return "ARTIST ADDED SUCCESSFULLY";
         }
-
         return "ARTIST WITH "+request.getStageName()+"ALREADY EXIST, PLS CHANGE STAGENAME";
     }
 
@@ -52,7 +50,6 @@ public class artistService {
             artistRepo.delete(exist);
             return "Artist "+stagename+" successfully deleted";
         }
-
         return "ARTIST"+stagename+" DOES NOT EXIST";
     }
 
@@ -68,7 +65,22 @@ public class artistService {
 
             return "UPDATED SUCCESSFULLY";
         }
-
         return "ARTIST "+ stagename + "DOES NOT EXIST";
     }
+
+    public String updateByName(String name , Artist request){
+
+        var exist = artistRepo.findByStageName(name);
+
+        if (exist != null){
+            exist.setName(request.getName());
+            exist.setStageName(request.getStageName());
+
+            artistRepo.save(exist);
+
+            return "UPDATED SUCCESSFULLY";
+        }
+        return "ARTIST "+ name + "DOES NOT EXIST";
+    }
+
 }

@@ -14,20 +14,25 @@ public class songService {
     private final songRepo songRepo;
 
     public List<Song> getAllSongs(){
-
         return songRepo.findAll();
-
     }
 
     public String addSong(Song request){
 
-        Song song = new Song();
-        song.setName(request.getName());
-        song.setDuration(request.getDuration());
+        var song = Song.builder()
+                .name(request.getName())
+                .duration(request.getDuration())
+                .build();
 
         songRepo.save(song);
 
         return "SONG IS SAVED SUCCESSFULLY";
+    }
+
+    public String deleteAllSongs(){
+        songRepo.deleteAll();
+
+        return "DELETED ALL SONGS SUCCESSFULLY";
     }
 
     public String deleteSong(String name){
@@ -38,10 +43,7 @@ public class songService {
 
             songRepo.delete(exist);
             return "deleted successfully";
-
         }
-
         return "song no dey here na";
-
     }
 }
