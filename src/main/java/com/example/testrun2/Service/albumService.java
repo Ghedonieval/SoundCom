@@ -4,22 +4,25 @@ import com.example.testrun2.Dto.Response.GenericResponse;
 import com.example.testrun2.Entity.Album;
 import com.example.testrun2.Repo.albumRepo;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @AllArgsConstructor
+@Slf4j
 @Service
 public class albumService {
 
     private final albumRepo albumRepo;
 
     public List<Album> getAllAlbum(){
+        log.info("get all albums");
         return albumRepo.findAll();
     }
 
     public String addAlbum(Album request){
-
+        log.info("add an album");
          var album = Album.builder()
                  .name(request.getName())
                  .genre(request.getGenre())
@@ -33,13 +36,13 @@ public class albumService {
     }
 
     public String deleteAllAlbums(){
-
+        log.info("delete all albums");
         albumRepo.deleteAll();
         return "ALL ALBUMS DELETED";
     }
 
     public String deleteAlbum(String name){
-
+        log.info("delete album by name");
         var exist = albumRepo.findByName(name);
 
         if (exist != null){
@@ -51,7 +54,7 @@ public class albumService {
     }
 
     public GenericResponse updateAlbum(String name , Album request){
-
+        log.info("update album details by name");
         var exist = albumRepo.findByName(name);
 
         if (exist != null){

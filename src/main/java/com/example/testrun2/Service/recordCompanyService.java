@@ -4,22 +4,25 @@ import com.example.testrun2.Dto.Response.GenericResponse;
 import com.example.testrun2.Entity.RecordingCompany;
 import com.example.testrun2.Repo.recordCompanyRepo;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @AllArgsConstructor
+@Slf4j
 @Service
 public class recordCompanyService {
 
     private final recordCompanyRepo companyRepo;
 
     public List<RecordingCompany> getAllCompanies(){
+        log.info("show all companies");
         return companyRepo.findAll();
     }
 
     public GenericResponse getCompanyByName(String name){
-
+        log.info("show company by name");
         var exist = companyRepo.findByName(name);
 
         if (exist != null){
@@ -40,7 +43,7 @@ public class recordCompanyService {
     }
 
     public String addCompany(RecordingCompany request){
-
+        log.info("add a company");
         var exist = companyRepo.findByName(request.getName());
 
         if (exist == null) {
@@ -59,7 +62,7 @@ public class recordCompanyService {
     }
 
     public String deleteByName(String name){
-
+        log.info("delete company by name");
         var exist = companyRepo.findByName(name);
 
         if (exist != null){
@@ -72,7 +75,7 @@ public class recordCompanyService {
     }
 
     public String updateByName(String name, RecordingCompany request){
-
+        log.info("update company by name");
         var exist = companyRepo.findByName(name);
 
         if (exist != null){
